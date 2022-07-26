@@ -49,11 +49,11 @@ PGP是个混合加密算法，它由一个对称加密算法（IDEA）、一个�
 PGP加密算法。
 
 首先要对消息进行填充，SM4分组长度为128比特即16个字节。填充完成后，需要将消息m与密钥k转化为bytes类型。调用GMSSL库中封装好的SM4加密函数对信息进行加密：
-‘
-SM4 = CryptSM4()
+
+```SM4 = CryptSM4()
 SM4.set_key(k, SM4_ENCRYPT)
-c1 = SM4.crypt_ecb(m)
-’
+c1 = SM4.crypt_ecb(m)```
+
 调用GMSSL库中封装好的SM2加密函数对密钥进行加密：
 ‘c2 = sm2_crypt.encrypt(k)’
 返回c1与c2。
