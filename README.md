@@ -50,13 +50,17 @@ PGP加密算法。加密之前要先对消息进行填充，SM4分组长度为12
 
 调用GMSSL库中封装好的SM4加密函数对信息进行加密：
 
-```SM4 = CryptSM4()
+```
+SM4 = CryptSM4()
 SM4.set_key(k, SM4_ENCRYPT)
-c1 = SM4.crypt_ecb(m)```
+c1 = SM4.crypt_ecb(m)
+```
 
 调用GMSSL库中封装好的SM2加密函数对密钥进行加密：
 
-```c2 = sm2_crypt.encrypt(k)```
+```
+c2 = sm2_crypt.encrypt(k)
+```
 
 返回c1与c2。
 
