@@ -17,7 +17,7 @@ PGP（Pretty Good Privacy），是一个基于RSA公钥和对称加密相结合�
 PGP是个混合加密算法，它由一个对称加密算法（IDEA）、一个非对称加密算法（RSA）、与单向散列算法（MD5）以及一个随机数产生器（从用户击键频率产生伪随机数序列的种子）组成的。
 
 # 实验过程
-本次实验旨在实现一个简易PGP，调用gmssl库中封装好的SM2/SM4加解密函数。
+本次实验旨在实现一个简易PGP，调用GMSSL库中封装好的SM2/SM4加解密函数。
 
 加密时使用对称加密算法SM4加密消息，非对称加密算法SM2加密会话密钥；
 
@@ -30,3 +30,31 @@ PGP是个混合加密算法，它由一个对称加密算法（IDEA）、一个�
 ![image](https://user-images.githubusercontent.com/105578152/180976114-0d3a1d28-5c1b-4034-ad68-6da4d6779308.png)
 
 # 部分代码说明
+## def epoint_mod(a, n)
+定义椭圆曲线上的模运算，返回值等于a mod n
+
+## def epoint_modmult(a, b, n)
+定义椭圆曲线上的模乘运算，返回值等于a*b^(-1) mod n
+
+## def epoint_add(P, Q, a, p)
+定义椭圆曲线上的加法运算，返回值等于P + Q
+
+## def epoint_mult(k, P, a, p)
+定义椭圆曲线上的点乘运算，返回值等于k * P
+
+## def keygen(a, p, n, G)
+生成SM2算法的公私钥对
+
+## def pgp_enc(m,k)
+PGP加密算法。
+
+首先要对消息进行填充，SM4分组长度为128比特即16个字节。填充完成后，需要将消息m与密钥k转化为bytes类型。调用GMSSL库中封装好的SM4加密函数对信息进行加密：
+‘
+SM4 = CryptSM4()
+SM4.set_key(k, SM4_ENCRYPT)
+c1 = SM4.crypt_ecb(m)
+’
+调用GMSSL库中封装好的SM2加密函数对密钥进行加密：
+‘c2 = sm2_crypt.encrypt(k)’
+返回c1与c2。
+
