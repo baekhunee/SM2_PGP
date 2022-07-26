@@ -46,7 +46,9 @@ PGP是个混合加密算法，它由一个对称加密算法（IDEA）、一个�
 生成SM2算法的公私钥对
 
 ## def pgp_enc(m,k)
-PGP加密算法。加密之前要先对消息进行填充，SM4分组长度为128比特即16个字节，填充完成后，需要将消息m与密钥k转化为bytes类型。
+PGP加密算法
+
+加密之前要先对消息进行填充，SM4分组长度为128比特即16个字节，填充完成后，需要将消息m与密钥k转化为bytes类型。
 
 调用GMSSL库中封装好的SM4加密函数对信息进行加密：
 
@@ -62,10 +64,10 @@ c1 = SM4.crypt_ecb(m)
 c2 = sm2_crypt.encrypt(k)
 ```
 
-返回c1与c2。
+返回c1与c2
 
 ## def pgp_dec(c1,c2)
-PGP解密算法。
+PGP解密算法
 
 调用GMSSL库中封装好的SM2解密函数对密钥进行解密：
 
@@ -80,3 +82,5 @@ SM4 = CryptSM4()
 SM4.set_key(k, SM4_DECRYPT)
 m = SM4.crypt_ecb(c1)
 ```
+# 测试结果
+![image](https://user-images.githubusercontent.com/105578152/180979638-f56be70a-bb26-4c3e-9516-6cc370d65a2b.png)
