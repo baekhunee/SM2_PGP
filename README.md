@@ -64,3 +64,19 @@ c2 = sm2_crypt.encrypt(k)
 
 返回c1与c2。
 
+## def pgp_dec(c1,c2)
+PGP解密算法。
+
+调用GMSSL库中封装好的SM2解密函数对密钥进行解密：
+
+```
+k = sm2_crypt.decrypt(c2)
+```
+
+调用GMSSL库中封装好的SM4解密函数对信息进行解密：
+
+```
+SM4 = CryptSM4()
+SM4.set_key(k, SM4_DECRYPT)
+m = SM4.crypt_ecb(c1)
+```
